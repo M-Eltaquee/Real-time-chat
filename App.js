@@ -25,27 +25,35 @@ const App = () => {
   const passwordInputRef = React.useRef();
   const enterUserNameHandler = (e) => {
     if (userNameInputRef.current.value.length > 0) {
-      return setUserName({
-        value: userNameInputRef.current.value,
-        isValid: true,
+      return setUserName(() => {
+        return {
+          value: userNameInputRef.current.value,
+          isValid: true,
+        };
       });
     } else {
-      return setUserName({
-        value: userNameInputRef.current.value,
-        isValid: false,
+      return setUserName(() => {
+        return {
+          value: userNameInputRef.current.value,
+          isValid: false,
+        };
       });
     }
   };
   const enterPasswordHandler = () => {
     if (passwordInputRef.current.value.length > 5) {
-      return setPassword({
-        value: passwordInputRef.current.value,
-        isValid: true,
+      return setPassword(() => {
+        return {
+          value: passwordInputRef.current.value,
+          isValid: true,
+        };
       });
     } else {
-      return setPassword({
-        value: passwordInputRef.current.value,
-        isValid: false,
+      return setPassword(() => {
+        return {
+          value: passwordInputRef.current.value,
+          isValid: false,
+        };
       });
     }
   };
