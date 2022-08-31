@@ -6,16 +6,7 @@ const App = () => {
   const [user, setUser] = React.useState(null);
   const [isLogged, setIslogged] = React.useState(false);
   console.log(user, isLogged);
-  return (
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route
-          path="login"
-          component={<LoginPage setUser={setUser} setIslogged={setIslogged} />}
-        />
-      </Route>
-    </Routes>
-  );
+  return <div>ddd</div>;
 };
 
 export default App;
