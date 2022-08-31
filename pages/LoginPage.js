@@ -9,9 +9,10 @@ import {
   Paper,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
-const LoginPage = ({ setUser, setIslogged }) => {
+const LoginPage = ({ setUser, setIslogged })  => {
+  const navigate = useNavigate();
   const [userName, setUserName] = React.useState({
     value: '',
     isValid: false,
@@ -64,6 +65,7 @@ const LoginPage = ({ setUser, setIslogged }) => {
     };
     setUser(loginData);
     setIslogged(true);
+    navigate('/');
   };
   const isFormValid = userName.isValid && password.isValid;
   return (
