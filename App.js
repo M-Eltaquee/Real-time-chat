@@ -1,28 +1,18 @@
 import * as React from 'react';
+import { Typography, Box } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
+import Login from './components/Login';
+import Rooms from './components/rooms/Rooms';
 
 const App = () => {
   const [user, setUser] = React.useState(null);
   const [isLogged, setIslogged] = React.useState(false);
-  console.log(user, isLogged);
+
   return (
     <React.Fragment>
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route
-          path="login"
-          element={<LoginPage setUser={setUser} setIslogged={setIslogged} />}
-        />
-        <Route
-          path="*"
-          element={
-            <h1 sx={{ height: '100%', justifyContent: 'center' }}>404</h1>
-          }
-        />
-      </Routes>
+      <h1>dddd</h1>
     </React.Fragment>
   );
 };
