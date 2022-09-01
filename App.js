@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Box, AppBar, Toolbar } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
@@ -11,9 +11,16 @@ const App = () => {
   const [isLogged, setIslogged] = React.useState(false);
 
   return (
-    <React.Fragment>
-      <h1>dddd</h1>
-    </React.Fragment>
+    <Box>
+      <AppBar position="">
+        <Toolbar></Toolbar>
+      </AppBar>
+      {!isLogged ? (
+        <Login setUser={setUser} setIslogged={setIslogged} />
+      ) : (
+        <Rooms activeUser={user.userName} />
+      )}
+    </Box>
   );
 };
 
