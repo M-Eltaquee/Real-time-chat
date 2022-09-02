@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './styles.css';
 const theme = createTheme();
 ReactDOM.createRoot(document.querySelector('#root')).render(
   <BrowserRouter>
