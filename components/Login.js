@@ -11,7 +11,7 @@ import {
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-const LoginPage = ({ setUser, setIslogged }) => {
+const Login = ({ setUser, setIsLogged }) => {
   const [userName, setUserName] = React.useState({
     value: '',
     isValid: false,
@@ -58,12 +58,10 @@ const LoginPage = ({ setUser, setIslogged }) => {
   };
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    const loginData = {
-      userName: userName.value,
-      password: password.value,
-    };
-    setUser(loginData);
-    setIslogged(true);
+
+    setUser(userName.value);
+    setIsLogged(true);
+    localStorage.setItem('loggedUser', JSON.stringify(userName.value));
   };
   const isFormValid = userName.isValid && password.isValid;
   return (
@@ -79,13 +77,10 @@ const LoginPage = ({ setUser, setIslogged }) => {
         <Avatar sx={{ backgroundColor: 'primary.main', mb: 1 }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant="h6">Sign in</Typography>
-        <Box
-          onSubmit={formSubmitHandler}
-          component="form"
-          sx={{ mt: 1 }}
-          onSubmit={formSubmitHandler}
-        >
+        <Typography variant="h6" component="h1">
+          Sign in
+        </Typography>
+        <Box onSubmit={formSubmitHandler} component="form" sx={{ mt: 1 }}>
           <TextField
             variant="outlined"
             label="Your Name"
@@ -122,4 +117,4 @@ const LoginPage = ({ setUser, setIslogged }) => {
   );
 };
 
-export default LoginPage;
+export default Login;

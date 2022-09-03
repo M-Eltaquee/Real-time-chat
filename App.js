@@ -17,10 +17,18 @@ import Rooms from './components/rooms/Rooms';
 
 const App = () => {
   const [user, setUser] = React.useState(null);
-  const [isLogged, setIslogged] = React.useState(false);
+  const [isLogged, setIsLogged] = React.useState(false);
+  const sea = JSON.parse(localStorage.getItem('loggedUser'));
+  React.useEffect(() => {
+    if (Boolean(sea)) {
+      setUser(sea);
+      setIsLogged(true);
+    }
+  }, []);
   const logoutHandler = () => {
     setUser(() => null);
-    setIslogged(() => false);
+    setIsLogged(() => false);
+    localStorage.removeItem('loggedUser');
   };
 
   return (
@@ -32,35 +40,48 @@ const App = () => {
               <Avatar>C</Avatar>
             </IconButton>
             <Box sx={{ flex: 1 }}></Box>
-            <React.Fragment>
-              <h1>dddd</h1>
+            {!isLogged && (
               <IconButton component={Link} to="/rooms">
-                <Typography
-                  variant="body1"
-                  component="li"
-                  sx={{ color: 'primary.contrastText' }}
-                >
-                  Logout
-                </Typography>
-              </IconButton>
-
-              <IconButton onClick={logoutHandler}>
                 <Typography
                   variant="body1"
                   component="li"
                   sx={{ color: 'primary.contrastText', listStyle: 'none' }}
                 >
-                  Logout
+                  Signup
                 </Typography>
               </IconButton>
-            </React.Fragment>
+            )}
+
+            {isLogged && (
+              <React.Fragment>
+                <IconButton component={Link} to="/rooms">
+                  <Typography
+                    variant="body1"
+                    component="li"
+                    sx={{ color: 'primary.contrastText', listStyle: 'none' }}
+                  >
+                    Chat Now
+                  </Typography>
+                </IconButton>
+
+                <IconButton onClick={logoutHandler}>
+                  <Typography
+                    variant="body1"
+                    component="li"
+                    sx={{ color: 'primary.contrastText', listStyle: 'none' }}
+                  >
+                    Logout
+                  </Typography>
+                </IconButton>
+              </React.Fragment>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
       {!isLogged ? (
-        <Login setUser={setUser} setIslogged={setIslogged} />
+        <Login setUser={setUser} setIsLogged={setIsLogged} />
       ) : (
-        <Rooms activeUser={user.userName} />
+        <Rooms activeUser={user} />
       )}
     </Box>
   );

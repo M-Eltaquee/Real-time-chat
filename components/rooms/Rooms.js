@@ -1,6 +1,14 @@
 import React from 'react';
-import { Button } from '@mui/material';
-
+import {
+  Container,
+  Paper,
+  Box,
+  Button,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { MicOffIcon } from '@mui/icons-material/MicOff';
+import { MicIcon } from '@mui/icons-material/Mic';
 const recordReducer = (state, action) => {
   switch (action.type) {
     case 'koko':
@@ -27,7 +35,40 @@ const Rooms = ({ activeUser }) => {
   };
 
   console.log(recordState);
-  return <Button onClick={handler}>vvv{activeUser}</Button>;
+  return (
+    <Container component="main" maxWidth="xs">
+      <Paper
+        sx={{
+          marginTop: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h6" component="h1">
+          ffff
+        </Typography>
+        <Box component="form" sx={{ mt: 1 }} noValidate autoComplete="off">
+          <TextField
+            variant="outlined"
+            size="small"
+            fullWidth
+            multiline
+            placeholder="Say somthing.."
+            name="value"
+          />
+          {recordState.isRecording ? (
+            <MicOffIcon className={styles.mic} />
+          ) : (
+            <MicIcon className={styles.mic} />
+          )}
+          <Button type="submite" variant="contained" fullWidth>
+            Submit
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
+  );
 };
 
 export default Rooms;
