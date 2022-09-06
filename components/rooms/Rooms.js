@@ -7,12 +7,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { MicOffIcon } from '@mui/icons-material/MicOff';
-import { MicIcon } from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import MicIcon from '@mui/icons-material/Mic';
+import AudioReactRecorder, { RecordState } from 'audio-react-recorder';
+
 const recordReducer = (state, action) => {
   switch (action.type) {
     case 'koko':
-      return action.value;
+      return { ...state, recordState: action.value };
     default:
       return state;
   }
@@ -26,7 +28,7 @@ const Rooms = ({ activeUser }) => {
     Error: null,
     recordState: null,
   };
-  const [recordState, recordDispatch] = React.useReducer(
+  const [recording, recordingDispatch] = React.useReducer(
     recordReducer,
     initialState
   );
@@ -34,7 +36,7 @@ const Rooms = ({ activeUser }) => {
     recordDispatch({ type: 'koko', value: ' seka w doghry' });
   };
 
-  console.log(recordState);
+  console.log(recording);
   return (
     <Container component="main" maxWidth="xs">
       <Paper
@@ -46,9 +48,14 @@ const Rooms = ({ activeUser }) => {
         }}
       >
         <Typography variant="h6" component="h1">
-          ffff
+          Chat Now
         </Typography>
-        <Box component="form" sx={{ mt: 1 }} noValidate autoComplete="off">
+        <Box
+          component="form"
+          sx={{ mt: 1, textAlign: 'center' }}
+          noValidate
+          autoComplete="off"
+        >
           <TextField
             variant="outlined"
             size="small"
@@ -57,16 +64,22 @@ const Rooms = ({ activeUser }) => {
             placeholder="Say somthing.."
             name="value"
           />
-          {recordState.isRecording ? (
-            <MicOffIcon className={styles.mic} />
-          ) : (
-            <MicIcon className={styles.mic} />
-          )}
+          <Box sx={{ my: 2 }}>
+            {recording.isRecording ? <MicOffIcon /> : <MicIcon />}
+          </Box>
           <Button type="submite" variant="contained" fullWidth>
             Submit
           </Button>
         </Box>
       </Paper>
+      <Box>
+        <AudioReactRecorder
+          state={recording.recordState}
+          onStop
+          canvasWidth="0"
+          canvasHeight="0"
+        />
+      </Box>
     </Container>
   );
 };

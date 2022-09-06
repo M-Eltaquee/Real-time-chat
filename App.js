@@ -14,6 +14,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Login from './components/Login';
 import Rooms from './components/rooms/Rooms';
+import Test from './components/rooms/Test';
 
 const App = () => {
   const [user, setUser] = React.useState(null);
@@ -81,7 +82,8 @@ const App = () => {
       {!isLogged ? (
         <Login setUser={setUser} setIsLogged={setIsLogged} />
       ) : (
-        <Rooms activeUser={user} />
+        // <Rooms activeUser={user} />
+        <Test />
       )}
     </Box>
   );
